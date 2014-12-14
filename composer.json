@@ -1,16 +1,22 @@
 {
-  "name" : "phalcon/Cities",
-  "description" : "This is a sample application for the Phalcon PHP Framework",
-  "version" : "1.1.0",
-  "require" : {
-    "php" : ">=5.3.9",
-    "ext-phalcon" : ">=1.2.4",
-    "swiftmailer/swiftmailer" : "5.0.*"
+  "name": "phalcon/Cities",
+  "description": "This is a sample application for the Phalcon PHP Framework",
+  "version": "1.1.0",
+  "require": {
+    "php": ">=5.3.9",
+    "ext-phalcon": ">=1.2.4",
+    "swiftmailer/swiftmailer": "5.0.*"
   },
-  "authors" : [ {
-    "name" : "Emil Thidell",
-    "email" : "mail@emil.ninja"
-  }
-  "keywords" : ["phalcon", "framework", "webgame" ],
-  "homepage" : "http://www.phalcon-php.dev"
+  "authors": [
+    {
+      "name": "Emil Thidell",
+      "email": "mail@emil.ninja"
+    }
+  ],
+  "keywords": [
+    "phalcon",
+    "framework",
+    "webgame"
+  ],
+  "homepage": "http://www.phalcon-php.dev"
 }
