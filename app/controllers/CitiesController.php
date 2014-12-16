@@ -162,6 +162,7 @@ class CitiesController extends ControllerBase
 
             $parsedCity = new \stdClass();
             $parsedCity->id      = $city->id;
+            $parsedCity->preview = $city->id;
             $parsedCity->x       = $city->x;
             $parsedCity->y       = $city->y;
             $parsedCity->title   = $city->title;
@@ -172,6 +173,11 @@ class CitiesController extends ControllerBase
                 $extra = "home";
             }
 
+            $checkPreviewImage = @file_get_contents('img/previews/'.$city->id.'.png');
+
+            if(!$checkPreviewImage){
+                $parsedCity->preview = '0';
+            }
             $parsedCity->extra   = $extra;
 
             $parsedCities[] = $parsedCity;

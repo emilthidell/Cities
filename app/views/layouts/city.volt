@@ -12,7 +12,7 @@
          <ul class="nav">
 
               {% if num_cities <= 1 %}
-                  <li><a href="/cities/{{ current_city }}">Your City</a></li>
+                  <li><a href="/cities/map/{{ current_city }}">Your City</a></li>
               {% else %}
                   <li><a href="/cities">Your Cities</a></li>
               {% endif %}

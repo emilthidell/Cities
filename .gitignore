@@ -163,7 +163,7 @@ pip-log.txt
 .DS_Store
 
 composer.lock
-app/config/config.php
+app/config/db_and_mail_info.txt
 app/cache/volt/*.php
 vendor
 app/cache/metaData/*.php

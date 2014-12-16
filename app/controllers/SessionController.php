@@ -7,6 +7,8 @@ use Cities\Forms\ForgotPasswordForm;
 use Cities\Auth\Exception as AuthException;
 use Cities\Models\Users;
 use Cities\Models\Cities;
+use Cities\Models\Buildings;
+use Cities\Models\Characters;
 use Cities\Models\ResetPasswords;
 
 /**
@@ -14,6 +16,8 @@ use Cities\Models\ResetPasswords;
  */
 class SessionController extends ControllerBase
 {
+
+    public $currentUserId;
 
     /**
      * Default action. Set the public layout (layouts/public.volt)
@@ -24,6 +28,8 @@ class SessionController extends ControllerBase
         if(is_array($this->auth->getIdentity())){
 
             $currentUser = $this->auth->getIdentity();
+
+            $this->currentUserId = $currentUser['id'];
 
             $loginState = 1;
 
@@ -107,7 +113,51 @@ class SessionController extends ControllerBase
                         'remember' => $this->request->getPost('remember')
                     ));
 
-                    return $this->response->redirect('users');
+                    $currentUser = $this->auth->getIdentity();
+
+                    $this->currentUserId = $currentUser['id'];
+
+                    $cities = Cities::find('user_id = '.$this->currentUserId);
+
+                    if(count($cities) == 0){
+
+                        $city = new Cities();
+                        $city->user_id    = $this->currentUserId;
+                        $city->x          = rand(50,950);
+                        $city->y          = rand(50,550);
+                        $city->state      = 0;
+                        $city->data       = '{}';
+                        $city->created_at = date("Y-m-d H:i:s");
+                        $city->updated_at = date("Y-m-d H:i:s");
+                        $city->title      = 'Your first city';
+                        $city->save();
+
+                        $home = new Buildings();
+                        $home->user_id      = $this->currentUserId;
+                        $home->city_id      = $city->id;
+                        $home->shop_item_id = 1;
+                        $home->upgrade      = 1;
+                        $home->health       = 100;
+                        $home->created_at   = date('Y-m-d h:i:s');
+                        $home->destroyed    = 0;
+                        $home->save();
+
+                        $home = new Characters();
+                        $home->user_id         = $this->currentUserId;
+                        $home->city_id         = $city->id;
+                        $home->current_city_id = $city->id;
+                        $home->title           = 'John Doe';
+                        $home->x               = 464;
+                        $home->y               = 256;
+                        $home->attributes      = '{}';
+                        $home->health          = 100;
+                        $home->created_at      = date('Y-m-d h:i:s');
+                        $home->updated_at      = date('Y-m-d h:i:s');
+                        $home->dead            = 0;
+                        $home->save();
+
+                    }
+                    return $this->response->redirect('index');
                 }
             }
         } catch (AuthException $e) {
