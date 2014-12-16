@@ -1,11 +1,11 @@
 <?php
 return new \Phalcon\Config(array(
     'database' => array(
-                    'adapter'  => 'Mysql',
-                    'host'     => '127.0.0.1',
-                    'username' => 'cities',
-                    'password' => '',
-                    'dbname'   => 'cities'
+                   'adapter'  => 'Mysql',
+                   'host'     => '127.0.0.1',
+                   'username' => 'citiesninja',
+                   'password' => 'N26wXKMHeWA47nFm',
+                   'dbname'   => 'citiesninja'
     ),
     'application' => array(
                     'controllersDir' => APP_DIR . '/controllers/',
@@ -27,11 +27,11 @@ return new \Phalcon\Config(array(
                     4 => 'Moon',
     ),
     'mail' => array(
-        'fromName'          => 'Cities',
-        'fromEmail'         => 'mail@emil.ninja',
-        'driver'            => 'mandrill', // or Amazon
-        'mandrill' => array(
-                    'apiKey' => '******************'
+            'fromName'          => 'Cities',
+            'fromEmail'         => 'mail@emil.ninja',
+            'driver'            => 'mandrill', // or Amazon
+            'mandrill' => array(
+                    'apiKey' => 'FnhIaJ6a5FOpMKJYEMR8fg'
+            )
         )
-    )
 ));
