@@ -183,6 +183,10 @@ div.worldmap span.extra-home i{
     top: -20px;
 }
 
+.navbar .brand{
+    margin-left: 0px;
+}
+
 div.front-banner{
     display:block;
     width:100%;

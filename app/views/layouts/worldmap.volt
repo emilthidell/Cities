@@ -18,7 +18,7 @@
             {% endif %}
 
             <li><a href="/users">Find Friends</a></li>
-            <li><a href="/cities/map/world">Map</a></li>
+            <li><a href="/worldmap">Map</a></li>
 
           </ul>
 
