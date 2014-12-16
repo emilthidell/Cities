@@ -18,7 +18,7 @@
             {% endif %}
 
             <li><a href="/users">Find Friends</a></li>
-            <li><a href="/worldmap">Map</a></li>
+            <li><a href="/cities/map/world">Map</a></li>
 
           </ul>
 
@@ -36,6 +36,16 @@
   </div>
 </div>
 
-<div class="container">
-  {{ content() }}
+<div class="container" style="width: 100%;">
+    <div align="center">
+        <div class="worldmap">
+            {% for city in cities %}
+              {% if city.extra != "" %}
+                <span class="extra-{{ city.extra }}" data-toggle="tooltip" data-placement="top" title="{{ city.title }}"  style="left:{{ city.x }}px; top:{{ city.y }}px; z-index:10;" data-id="{{ city.id }}"><i class="fa fa-home" style="position:relative;"></i></span>
+              {% endif %}
+              <a href="/cities/map/{{ city.id }}" class="minimap" data-toggle="tooltip" data-placement="top" title="{{ city.title }}" style="left:{{ city.x }}px; top:{{ city.y }}px;background-image:url(/img/previews/{{ city.id }}.png)"></a>
+            {% endfor %}
+        </div>
+    </div>
+    {{ content() }}
 </div>

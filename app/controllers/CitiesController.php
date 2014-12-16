@@ -25,19 +25,22 @@ class CitiesController extends ControllerBase
         $this->currentUserId = $currentUser['id'];
 
         $loginState = 0;
+
         if(is_array($currentUser)){
             $loginState = 1;
+
+            $cities = Cities::find("user_id = ".$currentUser['id']);
+
+            if(count($cities) <= 1){
+                $this->view->setVar('current_city', $cities[0]->id);
+            }
+
+            $this->view->setVar('logged_in', $loginState);
+            $this->view->setVar('cities', $cities);
+            $this->view->setVar('num_cities', count($cities));
+
         }
 
-        $cities = Cities::find("user_id = ".$currentUser['id']);
-
-        if(count($cities) <= 1){
-            $this->view->setVar('current_city', $cities[0]->id);
-        }
-
-        $this->view->setVar('logged_in', $loginState);
-        $this->view->setVar('cities', $cities);
-        $this->view->setVar('num_cities', count($cities));
     }
 
     /**
@@ -56,90 +59,126 @@ class CitiesController extends ControllerBase
     {
         $this->view->cache(false);
 
-        $city = Cities::findFirst('id = '.$id);
+        if(strtolower($id) == 'world'){
+            $this->worldMapAction;
+        }else{
+            $city = Cities::findFirst('id = '.$id);
 
-        $mapStateSettings = $this->config->mapStates;
+            $mapStateSettings = $this->config->mapStates;
 
-        $mapState = '';
+            $mapState = '';
 
-        foreach($mapStateSettings as $key => $value)
-        {
-            if($key == $city->state)
+            foreach($mapStateSettings as $key => $value)
             {
-                $mapState = $value;
-            }
-        }
-
-        $parsedBuildings = array();
-
-        $buildings = $this->getBuildings($id);
-
-        if(count($buildings) > 0)
-        {
-
-            foreach($buildings as $buildingId => $building)
-            {
-                $buildingProperties = $this->getShopItem($building->shop_item_id);
-
-                $parsedBuilding = new \stdClass();
-                $parsedBuilding->id              = $building->id;
-                $parsedBuilding->shop_item_id    = $buildingProperties->id;
-                $parsedBuilding->type            = $buildingProperties->type;
-                $parsedBuilding->title           = $buildingProperties->title;
-                $parsedBuilding->width           = $buildingProperties->width;
-                $parsedBuilding->length          = $buildingProperties->length;
-                $parsedBuilding->attributes      = json_decode($buildingProperties->attributes);
-                $parsedBuilding->price           = json_decode($buildingProperties->price);
-                $parsedBuilding->resource_folder = $buildingProperties->resource_folder;
-                $parsedBuilding->left            = $building->x;
-                $parsedBuilding->top             = $building->y;
-                $parsedBuilding->upgrade         = $building->upgrade;
-                $parsedBuilding->health          = $building->health;
-
-                $parsedBuildings[] = $parsedBuilding;
-            }
-        }
-
-        $parsedCharacters = array();
-
-        $characters = $this->getCharacters($id);
-
-        if(count($characters) > 0)
-        {
-                foreach($characters as $characterId => $character)
+                if($key == $city->state)
                 {
-                    $characterCity = Cities::findFirst('id = '.$character->city_id);
-
-                    $characterMapState = '';
-
-                    foreach($mapStateSettings as $key => $value)
-                    {
-                        if($key == $characterCity->state)
-                        {
-                            $characterMapState = $value;
-                        }
-                    }
-
-                    $parsedCharacter = new \stdClass();
-                    $parsedCharacter->id              = $character->id;
-                    $parsedCharacter->city_id         = $character->city_id;
-                    $parsedCharacter->current_city_id = $character->current_city_id;
-                    $parsedCharacter->title           = $character->title;
-                    $parsedCharacter->state           = strtolower(str_replace(' ','', $characterMapState));
-                    $parsedCharacter->left            = $character->x;
-                    $parsedCharacter->top             = $character->y;
-                    $parsedCharacter->attributes      = json_decode($character->attributes);
-                    $parsedCharacter->health          = $character->health;
-
-                    $parsedCharacters[] = $parsedCharacter;
+                    $mapState = $value;
                 }
+            }
+
+            $parsedBuildings = array();
+
+            $buildings = $this->getBuildings($id);
+
+            if(count($buildings) > 0)
+            {
+
+                foreach($buildings as $buildingId => $building)
+                {
+                    $buildingProperties = $this->getShopItem($building->shop_item_id);
+
+                    $parsedBuilding = new \stdClass();
+                    $parsedBuilding->id              = $building->id;
+                    $parsedBuilding->shop_item_id    = $buildingProperties->id;
+                    $parsedBuilding->type            = $buildingProperties->type;
+                    $parsedBuilding->title           = $buildingProperties->title;
+                    $parsedBuilding->width           = $buildingProperties->width;
+                    $parsedBuilding->length          = $buildingProperties->length;
+                    $parsedBuilding->attributes      = json_decode($buildingProperties->attributes);
+                    $parsedBuilding->price           = json_decode($buildingProperties->price);
+                    $parsedBuilding->resource_folder = $buildingProperties->resource_folder;
+                    $parsedBuilding->left            = $building->x;
+                    $parsedBuilding->top             = $building->y;
+                    $parsedBuilding->upgrade         = $building->upgrade;
+                    $parsedBuilding->health          = $building->health;
+
+                    $parsedBuildings[] = $parsedBuilding;
+                }
+            }
+
+            $parsedCharacters = array();
+
+            $characters = $this->getCharacters($id);
+
+            if(count($characters) > 0)
+            {
+                    foreach($characters as $characterId => $character)
+                    {
+                        $characterCity = Cities::findFirst('id = '.$character->city_id);
+
+                        $characterMapState = '';
+
+                        foreach($mapStateSettings as $key => $value)
+                        {
+                            if($key == $characterCity->state)
+                            {
+                                $characterMapState = $value;
+                            }
+                        }
+
+                        $parsedCharacter = new \stdClass();
+                        $parsedCharacter->id              = $character->id;
+                        $parsedCharacter->city_id         = $character->city_id;
+                        $parsedCharacter->current_city_id = $character->current_city_id;
+                        $parsedCharacter->title           = $character->title;
+                        $parsedCharacter->state           = strtolower(str_replace(' ','', $characterMapState));
+                        $parsedCharacter->left            = $character->x;
+                        $parsedCharacter->top             = $character->y;
+                        $parsedCharacter->attributes      = json_decode($character->attributes);
+                        $parsedCharacter->health          = $character->health;
+
+                        $parsedCharacters[] = $parsedCharacter;
+                    }
+            }
+
+            $this->view->setVar('city',       $city);
+            $this->view->setVar('characters', $parsedCharacters);
+            $this->view->setVar('buildings',  $parsedBuildings);
+            $this->view->setVar('mapFolder',  strtolower(str_replace(' ','', $mapState)));
+            $this->view->setTemplateBefore('city');
         }
-        
-        $this->view->setVar('city',       $city);
-        $this->view->setVar('characters', $parsedCharacters);
-        $this->view->setVar('buildings',  $parsedBuildings);
-        $this->view->setVar('mapFolder',  strtolower(str_replace(' ','', $mapState)));
-        $this->view->setTemplateBefore('city');
+    }
+
+    /**
+     * Show the world map
+     */
+    public function worldMapAction()
+    {
+        $cities = Cities::find();
+
+        $parsedCities = array();
+
+        foreach($cities as $city){
+
+            $parsedCity = new \stdClass();
+            $parsedCity->id      = $city->id;
+            $parsedCity->x       = $city->x;
+            $parsedCity->y       = $city->y;
+            $parsedCity->title   = $city->title;
+            $parsedCity->user_id = $city->user_id;
+
+            $extra = "";
+            if($city->user_id == $this->currentUserId){
+                $extra = "home";
+            }
+
+            $parsedCity->extra   = $extra;
+
+            $parsedCities[] = $parsedCity;
+        }
+
+        $this->view->setVar('cities', $parsedCities);
+        $this->view->setTemplateBefore('worldmap');
     }
 
     /**

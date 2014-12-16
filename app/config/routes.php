@@ -14,4 +14,9 @@ $router->add('/reset-password/{code}/{email}', array(
     'action' => 'resetPassword'
 ));
 
+$router->add('/worldmap', array(
+    'controller' => 'Cities',
+    'action' => 'worldMap'
+));
+
 return $router;

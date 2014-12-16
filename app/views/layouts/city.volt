@@ -9,23 +9,18 @@
       {{ link_to(null, 'class': 'brand', 'Cities')}}
         <div class="nav-collapse">
 
-          <ul class="nav">
+         <ul class="nav">
 
-            {% if num_cities <= 1 %}
+              {% if num_cities <= 1 %}
+                  <li><a href="/cities/{{ current_city }}">Your City</a></li>
+              {% else %}
+                  <li><a href="/cities">Your Cities</a></li>
+              {% endif %}
 
-                <li><a href="/cities/{{ current_city }}">Your City</a></li>
-                <li><a href="/users">Find Friends</a></li>
-                <li><a href="/profiles">Profiles</a></li>
-                <li><a href="/permissions">Permissions</a></li>
+              <li><a href="/users">Find Friends</a></li>
+              <li><a href="/worldmap">Map</a></li>
 
-            {% else %}
-
-                <li><a href="/cities">Your Cities</a></li>
-                <li><a href="/users">Find Friends</a></li>
-                <li><a href="/profiles">Profiles</a></li>
-                <li><a href="/permissions">Permissions</a></li>
-
-            {% endif %}
+            </ul>
 
           </ul>
 

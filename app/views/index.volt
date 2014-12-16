@@ -3,6 +3,7 @@
     <head>
         <title>Welcome to Cities</title>
         <link href="//netdna.bootstrapcdn.com/bootswatch/2.3.1/united/bootstrap.min.css" rel="stylesheet">
+        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
         {{ stylesheet_link('css/style.css') }}
         {{ stylesheet_link('css/stoneage.css') }}
     </head>
@@ -36,6 +37,24 @@
                      }
                  });
                  $( window ).resize();
+              }
+
+              if($('.extra-home').length > 0){
+                  $('.extra-home').click(function(){
+                      var cityId = $(this).data('id');
+                      window.location.href = '/cities/map/'+cityId;
+                      return false;
+                  });
+                  var differ = 1;
+                  setInterval(function(){
+                      var homeBouncerTop = $('.extra-home').find('i').css('top').replace('px','');
+                      if(homeBouncerTop > -10){
+                          differ = -1;
+                      }else if(homeBouncerTop < -15){
+                          differ = 1;
+                      }
+                      $('.extra-home').find('i').css('top', (parseInt(differ)+parseInt(homeBouncerTop))+'px');
+                  },100);
               }
             })
         </script>

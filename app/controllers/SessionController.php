@@ -6,6 +6,7 @@ use Cities\Forms\SignUpForm;
 use Cities\Forms\ForgotPasswordForm;
 use Cities\Auth\Exception as AuthException;
 use Cities\Models\Users;
+use Cities\Models\Cities;
 use Cities\Models\ResetPasswords;
 
 /**
@@ -21,7 +22,19 @@ class SessionController extends ControllerBase
     {
         $loginState = 0;
         if(is_array($this->auth->getIdentity())){
+
+            $currentUser = $this->auth->getIdentity();
+
             $loginState = 1;
+
+            $cities = Cities::find("user_id = ".$currentUser['id']);
+
+            if(count($cities) <= 1){
+                $this->view->setVar('current_city', $cities[0]->id);
+            }
+
+            $this->view->setVar('num_cities', count($cities));
+
         }
         $this->view->setVar('logged_in', $loginState);
         $this->view->setTemplateBefore('public');
