@@ -1,6 +1,8 @@
 <?php
 namespace Cities\Controllers;
 
+use Cities\Models\Cities;
+
 /**
  * Display the privacy page.
  */
