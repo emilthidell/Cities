@@ -75,7 +75,7 @@ class ResetPasswords extends Model
      */
     public function afterCreate()
     {
-        $this->getDI()
+        $response = $this->getDI()
             ->getMail()
             ->send(array(
             $this->user->email => $this->user->name

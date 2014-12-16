@@ -8,7 +8,7 @@
 			<tr style="background:#D44413">
 				<td style="padding-left:20px">
 					<a target="_blank" style="text-decoration:none;color:inherit;font-family:'HelveticaNeue','Helvetica Neue',Helvetica,Arial,sans-serif;font-weight:normal;">
-						<h1 style="color:#fff">Vökuró</h1>
+						<h1 style="color:#fff">Cities</h1>
 					</a>
 				</td>
 			</tr>

@@ -1,0 +1,11 @@
+div.stoneage .map{
+    background-image: url('/img/stoneage/ground.png');
+}
+
+div.stoneage .character{
+    background-image: url('/img/stoneage/character.png');
+}
+
+div.stoneage .home{
+    background-image: url('/img/stoneage/home.png');
+}

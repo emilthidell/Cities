@@ -7,7 +7,7 @@
 
 				<h2 style="font-size: 14px;font-family:'HelveticaNeue','Helvetica Neue',Helvetica,Arial,sans-serif;">Reset Your Password</h2>
 
-				<p style="font-size: 13px;line-height:24px;font-family:'HelveticaNeue','Helvetica Neue',Helvetica,Arial,sans-serif;">To reset the password for the Vökuró account associated with your email, click on the button below. If you don't want to reset your password, please disregard this email.
+				<p style="font-size: 13px;line-height:24px;font-family:'HelveticaNeue','Helvetica Neue',Helvetica,Arial,sans-serif;">To reset the password for the Cities account associated with your email, click on the button below. If you don't want to reset your password, please disregard this email.
 
 				<br>
 				<br>
@@ -15,7 +15,7 @@
 
 				<br>
 				<br>
-				Vökuró!. Enjoy!
+				Cities!. Enjoy!
 				<br>
 			</p>
 		</td>

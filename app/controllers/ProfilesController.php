@@ -6,6 +6,7 @@ use Phalcon\Mvc\Model\Criteria;
 use Phalcon\Paginator\Adapter\Model as Paginator;
 use Cities\Forms\ProfilesForm;
 use Cities\Models\Profiles;
+use Cities\Models\Cities;
 
 /**
  * Cities\Controllers\ProfilesController
@@ -14,11 +15,25 @@ use Cities\Models\Profiles;
 class ProfilesController extends ControllerBase
 {
 
-    /**
-     * Default action. Set the private (authenticated) layout (layouts/private.volt)
-     */
     public function initialize()
     {
+        $currentUser = $this->auth->getIdentity();
+
+        $loginState = 0;
+        if(is_array($currentUser)){
+            $loginState = 1;
+        }
+
+        $cities = Cities::find("user_id = ".$currentUser['id']);
+
+        if(count($cities) <= 1){
+            $this->view->setVar('current_city', $cities[0]->id);
+        }
+
+        $this->view->setVar('logged_in', $loginState);
+        $this->view->setVar('cities', $cities);
+        $this->view->setVar('num_cities', count($cities));
+
         $this->view->setTemplateBefore('private');
     }
 

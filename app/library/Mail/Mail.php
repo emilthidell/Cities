@@ -5,7 +5,7 @@ use Phalcon\Mvc\User\Component;
 use Swift_Message as Message;
 use Swift_SmtpTransport as Smtp;
 use Phalcon\Mvc\View;
-
+use Mandrill;
 /**
  * Cities\Mail\Mail
  * Sends e-mails based on pre-defined templates
@@ -18,6 +18,16 @@ class Mail extends Component
     protected $amazonSes;
 
     protected $directSmtp = false;
+
+    /**
+     * Construct the Mail and check driver config
+     *
+     */
+    public function __construct(){
+        if(strtolower($this->config->mail->driver) == "smtp"){
+            $this->directSmtp = true;
+        }
+    }
 
     /**
      * Send a raw e-mail via AmazonSES
@@ -70,7 +80,7 @@ class Mail extends Component
     }
 
     /**
-     * Sends e-mails via AmazonSES based on predefined templates
+     * Sends e-mails via AmazonSES or SMTP based on predefined templates
      *
      * @param array $to
      * @param string $subject
@@ -79,11 +89,65 @@ class Mail extends Component
      */
     public function send($to, $subject, $name, $params)
     {
-
         // Settings
         $mailSettings = $this->config->mail;
 
         $template = $this->getTemplate($name, $params);
+        $text     = trim(strip_tags($template));
+
+        if(strtolower($mailSettings->driver) == "mandrill"){
+
+            // Create the message
+            $message = Message::newInstance()
+                ->setSubject($subject)
+                ->setTo($to)
+                ->setFrom(array(
+                    $mailSettings->fromEmail => $mailSettings->fromName
+                ))
+                ->setBody($template, 'text/html');
+
+            try {
+                $mandrill = new Mandrill($mailSettings->mandrill->apiKey);
+                if(is_string($to)){
+                    $to = array($to);
+                }
+                $newTo = array();
+                foreach($to as $key=>$t){
+                    if(strpos($t, '@')){
+                        $newTo[] = $t;
+                    }else if(strpos($key, '@')){
+                        $newTo[] = $key;
+                    }
+                }
+
+                if(count($newTo) === 0){
+                    return false;
+                }
+
+                $message = array(
+                    'raw_message' => $message->toString(),
+                    'key' => $mailSettings->mandrill->apiKey,
+                    'subject' => $subject,
+                    'from_email' => $mailSettings->fromEmail,
+                    'from_name' => $mailSettings->fromName,
+                    'to' => $newTo,
+                    'ip_pool' => 'Cities Pool',
+                    'async'   => true,
+                );
+
+                $url = "/messages/send-raw";
+
+                $result = $mandrill->call($url, $message);
+
+                return true;
+                
+            } catch(Mandrill_Error $e) {
+                // Mandrill errors are thrown as exceptions
+                echo 'A mandrill error occurred: ' . get_class($e) . ' - ' . $e->getMessage();
+                // A mandrill error occurred: Mandrill_Unknown_Subaccount - No subaccount exists with the id 'customer-123'
+                throw $e;
+            }
+        }
 
         // Create the message
         $message = Message::newInstance()
@@ -93,6 +157,9 @@ class Mail extends Component
                 $mailSettings->fromEmail => $mailSettings->fromName
             ))
             ->setBody($template, 'text/html');
+
+        $headers = $message->getHeaders();
+
 
         if ($this->directSmtp) {
 

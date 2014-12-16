@@ -19,6 +19,11 @@ class SessionController extends ControllerBase
      */
     public function initialize()
     {
+        $loginState = 0;
+        if(is_array($this->auth->getIdentity())){
+            $loginState = 1;
+        }
+        $this->view->setVar('logged_in', $loginState);
         $this->view->setTemplateBefore('public');
     }
 

@@ -168,3 +168,4 @@ app/cache/volt/*.php
 vendor
 app/cache/metaData/*.php
 data.txt
+public/img/img-resourse

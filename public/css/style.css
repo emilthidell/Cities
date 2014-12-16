@@ -1,15 +1,26 @@
+
+body{
+    background-image: url(/img/stardust.png);
+}
+
+div.navbar-spacer{
+    width:100%;
+    height:41px;
+    display:block;
+}
+
 div.remember {
-	margin-top: 7px;
-	color: #969696;
+    margin-top: 7px;
+    color: #969696;
 }
 
 div.remember label {
-	padding-top: 15px;
+    padding-top: 15px;
 }
 
 div.forgot {
-	margin-top: 7px;
-	color: #dadada;
+    margin-top: 7px;
+    color: #dadada;
 }
 
 footer {
@@ -21,28 +32,84 @@ footer {
 }
 
 footer a {
-	margin-left: 10px;
-	margin-right: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 table.signup td {
-	padding: 10px;
+    padding: 10px;
 }
 
 table.signup .alert {
-	margin-bottom: 0;
+    margin-bottom: 0;
     margin-top: 3px;
 }
 
 table.perms select {
-	margin-top: 5px;
-	margin-right: 10px;
+    margin-top: 5px;
+    margin-right: 10px;
 }
 
 table.perms label {
-	margin-right: 10px;
+    margin-right: 10px;
 }
 
 div.main-container {
-	min-height: 450px;
+    min-height: 450px;
+}
+
+div.city-intro{
+    background-image: url('/img/city-intro.png');
+    background-color: transparent;
+    background-position: center center;
+    background-repeat: no-repeat;
+    color: white;
+    text-align: center;
+    text-shadow: 1px 1px 1px black;
+    height: 450px;
+}
+
+div.map{
+    background-position: center center;
+    background-repeat: no-repeat;
+    color: white;
+    text-align: center;
+    text-shadow: 1px 1px 1px black;
+    width:1000px;
+    height:500px;
+    position:relative;
+    z-index:5;
+}
+
+div.character{
+    background-position: center center;
+    background-repeat: no-repeat;
+    width: 33px;
+    height: 33px;
+    position: absolute;
+    top: 150px;
+    left: 300px;
+    z-index:20;
+}
+
+div.building{
+    background-position: center center;
+    background-repeat: no-repeat;
+    position: absolute;
+    z-index:10;
+    background-size: cover;
+    cursor: pointer;
+}
+
+div.front-banner{
+    display:block;
+    width:100%;
+    height:170px;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+div.city-name h2{
+    text-align: center;
+    text-shadow: 1px 1px 1px black;
+    color: white;
 }

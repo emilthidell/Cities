@@ -1,6 +1,6 @@
 {{ content() }}
 
-<ul class="pager">
+<ul class="pager well">
     <li class="previous pull-left">
         {{ link_to("profiles/index", "&larr; Go Back") }}
     </li>
@@ -8,7 +8,7 @@
         {{ link_to("profiles/create", "Create profiles", "class": "btn btn-primary") }}
     </li>
 </ul>
-
+<div class="well">
 {% for profile in page.items %}
 {% if loop.first %}
 <table class="table table-bordered table-striped" align="center">
@@ -48,3 +48,4 @@
 {% else %}
     No profiles are recorded
 {% endfor %}
+</div>

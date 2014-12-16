@@ -1,4 +1,4 @@
-<div class="navbar">
+<div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
       <div class="container" style="width: auto;">
         <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -6,7 +6,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </a>
-        {{ link_to(null, 'class': 'brand', 'Vökuró')}}
+        {{ link_to(null, 'class': 'brand', 'Cities')}}
         <div class="nav-collapse">
           <ul class="nav">
 
@@ -38,15 +38,15 @@
     </div><!-- /navbar-inner -->
   </div>
 
-<div class="container main-container">
+<div class="container main-container" style="width:1200px;">
   {{ content() }}
 </div>
 
 <footer>
-Made with love by the Phalcon Team
+Made with love by the ninja himself!
 
     {{ link_to("privacy", "Privacy Policy") }}
     {{ link_to("terms", "Terms") }}
 
-© 2013 Phalcon Team.
+© 2013 Emil Thidell
 </footer>

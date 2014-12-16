@@ -1,4 +1,4 @@
-<div class="navbar navbar-inverse">
+<div class="navbar navbar-fixed-top">
   <div class="navbar-inner">
     <div class="container" style="width: auto;">
       <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -6,25 +6,26 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </a>
-      {{ link_to(null, 'class': 'brand', 'Vökuró')}}
+      {{ link_to(null, 'class': 'brand', 'Cities')}}
         <div class="nav-collapse">
 
           <ul class="nav">
 
-            {%- set menus = [
-              'Home': null,
-              'Users': 'users',
-              'Profiles': 'profiles',
-              'Permissions': 'permissions'
-            ] -%}
+            {% if num_cities <= 1 %}
 
-            {%- for key, value in menus %}
-              {% if value == dispatcher.getControllerName() %}
-              <li class="active">{{ link_to(value, key) }}</li>
-              {% else %}
-              <li>{{ link_to(value, key) }}</li>
-              {% endif %}
-            {%- endfor -%}
+                <li><a href="/cities/{{ current_city }}">Your City</a></li>
+                <li><a href="/users">Find Friends</a></li>
+                <li><a href="/profiles">Profiles</a></li>
+                <li><a href="/permissions">Permissions</a></li>
+
+            {% else %}
+
+                <li><a href="/cities">Your Cities</a></li>
+                <li><a href="/users">Find Friends</a></li>
+                <li><a href="/profiles">Profiles</a></li>
+                <li><a href="/permissions">Permissions</a></li>
+
+            {% endif %}
 
           </ul>
 
