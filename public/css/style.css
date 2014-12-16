@@ -187,6 +187,29 @@ div.worldmap span.extra-home i{
     margin-left: 0px;
 }
 
+.phalcon-info{
+    width:200px;
+    height:75px;
+    display:block;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+
+.phalcon-info .text{
+    width:98px;
+    height:28px;
+    display:block;
+    background-image:url(/img/phalcon-text.png);
+}
+
+.phalcon-info .logo{
+    width:82px;
+    height:82px;
+    display:block;
+    background-image:url(/img/phalcon-logo.png);
+}
+
 div.front-banner{
     display:block;
     width:100%;
