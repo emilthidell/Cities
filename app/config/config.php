@@ -3,9 +3,9 @@ return new \Phalcon\Config(array(
     'database' => array(
                    'adapter'  => 'Mysql',
                    'host'     => '127.0.0.1',
-                   'username' => 'citiesninja',
-                   'password' => 'N26wXKMHeWA47nFm',
-                   'dbname'   => 'citiesninja'
+                   'username' => 'cities',
+                   'password' => '',
+                   'dbname'   => 'cities'
     ),
     'application' => array(
                     'controllersDir' => APP_DIR . '/controllers/',
@@ -31,7 +31,7 @@ return new \Phalcon\Config(array(
             'fromEmail'         => 'mail@emil.ninja',
             'driver'            => 'mandrill', // or Amazon
             'mandrill' => array(
-                    'apiKey' => 'FnhIaJ6a5FOpMKJYEMR8fg'
+                    'apiKey' => ''
             )
         )
 ));
