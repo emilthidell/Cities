@@ -51,10 +51,16 @@
         </div>
         <div class="{{ mapFolder }}">
             <div class="map">
-                <div class="character"></div>
+                {% if city.layer != "" %}
+                    <div class="layer" style="background-image:url(/img/{{ mapFolder }}/{{ city.layer }}.png)"></div>
+                {% endif %}
+
+                {% for character in characters %}
+                  <div class="character" data-toggle="tooltip" data-placement="top" title="{{ character.title }}" id="character-{{ character.id }}" style="left: {{ character.left }}px;top: {{ character.top }}px;background-image: url(/img/{{ character.state }}/character.png);"></div>
+                {% endfor %}
 
                 {% for building in buildings %}
-                  <div class="building" data-toggle="tooltip" data-placement="top" title="Go to {{ building.title }}" id="{{ building.id }}" style="width: {{ building.width }}px;height: {{ building.length }}px;left: {{ building.left }}px;top: {{ building.top }}px;background-image: url(/img/{{ building.resource_folder }}/out-{{ building.upgrade }}.png);"></div>
+                  <div class="building" data-toggle="tooltip" data-placement="top" title="Go to {{ building.title }}" id="building-{{ building.id }}" style="width: {{ building.width }}px;height: {{ building.length }}px;left: {{ building.left }}px;top: {{ building.top }}px;background-image: url(/img/{{ building.resource_folder }}/out-{{ building.upgrade }}.png);"></div>
                 {% endfor %}
 
             </div>

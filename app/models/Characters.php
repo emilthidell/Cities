@@ -7,7 +7,7 @@ use Phalcon\Mvc\Model;
  * Cities\Models\Profiles
  * All the profile levels in the application. Used in conjenction with ACL lists
  */
-class Buildings extends Model
+class Characters extends Model
 {
 
     /**
@@ -29,16 +29,16 @@ class Buildings extends Model
     public $city_id;
 
     /**
-     * Shop item Id
+     * Current City Id
      * @var integer
      */
-    public $shop_item_id;
+    public $current_city_id;
 
     /**
-     * Upgrade
-     * @var integer
+     * Title
+     * @var string
      */
-    public $upgrade;
+    public $title;
 
     /**
      * X
@@ -59,23 +59,35 @@ class Buildings extends Model
     public $health;
 
     /**
+     * Attributes
+     * @var blob
+     */
+    public $attributes;
+
+    /**
      * Created at
      * @var timestamp
      */
     public $created_at;
 
     /**
-     * Destroyed
+     * Updated at
+     * @var timestamp
+     */
+    public $updated_at;
+
+    /**
+     * Dead
      * @var boolean
      */
-    public $destroyed;
+    public $dead;
 
     /**
      * Define relationships to Users and Permissions
      */
     public function initialize()
     {
-        $this->setSource("buildings");
+        $this->setSource("characters");
     }
 
     /**

@@ -35,6 +35,12 @@ class Cities extends Model
     public $state;
 
     /**
+     * Layer
+     * @var string
+     */
+    public $layer;
+
+    /**
      * Data
      * @var blob
      */

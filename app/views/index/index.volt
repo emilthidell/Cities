@@ -1,7 +1,7 @@
 {{ content() }}
 
 <header class="jumbotron subhead" id="overview">
-    <div class="hero-unit city-intro">
+    <div class="hero-unit city-intro-1">
         <h1>Welcome to Cities!</h1>
         <p class="lead">This is a application built with Phalcon Framework</p>
 
