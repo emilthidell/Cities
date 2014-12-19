@@ -41,6 +41,12 @@ class Shop extends Model
     public $length;
 
     /**
+     * Description
+     * @var string
+     */
+    public $description;
+
+    /**
      * Attributes
      * @var blob
      */

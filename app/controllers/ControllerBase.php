@@ -20,6 +20,8 @@ class ControllerBase extends Controller
      */
     public function beforeExecuteRoute(Dispatcher $dispatcher)
     {
+        $this->preDefineTemplateVars();
+
         $controllerName = $dispatcher->getControllerName();
 
         // Only check permissions on private controllers
@@ -61,5 +63,15 @@ class ControllerBase extends Controller
                 return false;
             }
         }
+    }
+
+    public function preDefineTemplateVars(){
+
+        $guide = new \stdClass();
+        $guide->mode         = 0;
+        $guide->messages     = array();
+        $guide->jsonMessages = '';
+
+        $this->view->setVar('guide', $guide);
     }
 }

@@ -9,11 +9,15 @@ use Cities\Models\Cities;
 class IndexController extends ControllerBase
 {
 
-    /**
-     * Default action. Set the public layout (layouts/public.volt)
-     */
-    public function indexAction()
+    public function initialize()
     {
+        $currentUser = $this->checkAuth();
+    }
+
+    /**
+     * Check the user auth
+     */
+    public function checkAuth(){
         $loginState = 0;
         if(is_array($this->auth->getIdentity())){
 
@@ -23,13 +27,22 @@ class IndexController extends ControllerBase
 
             $cities = Cities::find("user_id = ".$currentUser['id']);
 
-            if(count($cities) <= 1){
+            if(count($cities) == 1){
                 $this->view->setVar('current_city', $cities[0]->id);
             }
 
             $this->view->setVar('num_cities', count($cities));
         }
         $this->view->setVar('logged_in', $loginState);
+
+        return $currentUser;
+    }
+
+    /**
+     * Default action. Set the public layout (layouts/public.volt)
+     */
+    public function indexAction()
+    {
         $this->view->setTemplateBefore('public');
     }
 }

@@ -12,7 +12,7 @@
           <ul class="nav">
 
             {% if num_cities <= 1 %}
-                <li><a href="/cities/map/{{ current_city }}">Your City</a></li>
+                <li><a href="/cities/{{ current_city }}">Your City</a></li>
             {% else %}
                 <li><a href="/cities">Your Cities</a></li>
             {% endif %}
@@ -43,7 +43,7 @@
               {% if city.extra != "" %}
                 <span class="extra-{{ city.extra }}" data-toggle="tooltip" data-placement="top" title="{{ city.title }}"  style="left:{{ city.x }}px; top:{{ city.y }}px; z-index:10;" data-id="{{ city.id }}"><i class="fa fa-home" style="position:relative;"></i></span>
               {% endif %}
-              <a href="/cities/map/{{ city.id }}" class="minimap" data-toggle="tooltip" data-placement="top" title="{{ city.title }}" style="left:{{ city.x }}px; top:{{ city.y }}px;background-image:url(/img/previews/{{ city.preview }}.png)"></a>
+              <a href="/cities/{{ city.id }}" class="minimap" data-toggle="tooltip" data-placement="top" title="{{ city.title }}" style="left:{{ city.x }}px; top:{{ city.y }}px;background-image:url(/img/previews/{{ city.preview }}.png)"></a>
             {% endfor %}
         </div>
     </div>

@@ -136,28 +136,30 @@ class SessionController extends ControllerBase
                         $home->user_id      = $this->currentUserId;
                         $home->city_id      = $city->id;
                         $home->shop_item_id = 1;
+                        $home->x            = 392;
+                        $home->y            = 125;
                         $home->upgrade      = 1;
                         $home->health       = 100;
                         $home->created_at   = date('Y-m-d h:i:s');
                         $home->destroyed    = 0;
                         $home->save();
 
-                        $home = new Characters();
-                        $home->user_id         = $this->currentUserId;
-                        $home->city_id         = $city->id;
-                        $home->current_city_id = $city->id;
-                        $home->title           = 'John Doe';
-                        $home->x               = 464;
-                        $home->y               = 256;
-                        $home->attributes      = '{}';
-                        $home->health          = 100;
-                        $home->created_at      = date('Y-m-d h:i:s');
-                        $home->updated_at      = date('Y-m-d h:i:s');
-                        $home->dead            = 0;
-                        $home->save();
+                        $character = new Characters();
+                        $character->user_id         = $this->currentUserId;
+                        $character->city_id         = $city->id;
+                        $character->current_city_id = $city->id;
+                        $character->title           = 'John Doe';
+                        $character->x               = 464;
+                        $character->y               = 256;
+                        $character->attributes      = '{}';
+                        $character->health          = 100;
+                        $character->created_at      = date('Y-m-d h:i:s');
+                        $character->updated_at      = date('Y-m-d h:i:s');
+                        $character->dead            = 0;
+                        $character->save();
 
                     }
-                    return $this->response->redirect('index');
+                    return $this->response->redirect('worldmap');
                 }
             }
         } catch (AuthException $e) {

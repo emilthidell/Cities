@@ -19,4 +19,14 @@ $router->add('/worldmap', array(
     'action' => 'worldMap'
 ));
 
+$router->add('/cities/{cityDd}', array(
+    'controller' => 'cities',
+    'action' => 'map'
+));
+
+$router->add('/cities/{cityId}/building/{buildingId}', array(
+    'controller' => 'cities',
+    'action' => 'building'
+));
+
 return $router;

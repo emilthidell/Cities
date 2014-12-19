@@ -13,6 +13,7 @@ use Phalcon\Flash\Direct as Flash;
 use Cities\Auth\Auth;
 use Cities\Acl\Acl;
 use Cities\Mail\Mail;
+use Cities\Guide\Guide;
 
 /**
  * The FactoryDefault Dependency Injector automatically register the right services providing a full stack framework

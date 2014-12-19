@@ -7,7 +7,7 @@
     <div align="left">
 
     {% for city in cities %}
-      <li><a href="/cities/map/{{ city.id }}">{{ city.title }}</a></li>
+      <li><a href="/cities/{{ city.id }}">{{ city.title }}</a></li>
     {% endfor %}
 
     </div>
