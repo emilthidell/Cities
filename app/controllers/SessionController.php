@@ -113,52 +113,6 @@ class SessionController extends ControllerBase
                         'remember' => $this->request->getPost('remember')
                     ));
 
-                    $currentUser = $this->auth->getIdentity();
-
-                    $this->currentUserId = $currentUser['id'];
-
-                    $cities = Cities::find('user_id = '.$this->currentUserId);
-
-                    if(count($cities) == 0){
-
-                        $city = new Cities();
-                        $city->user_id    = $this->currentUserId;
-                        $city->x          = rand(50,950);
-                        $city->y          = rand(50,550);
-                        $city->state      = 0;
-                        $city->data       = '{}';
-                        $city->created_at = date("Y-m-d H:i:s");
-                        $city->updated_at = date("Y-m-d H:i:s");
-                        $city->title      = 'Your first city';
-                        $city->save();
-
-                        $home = new Buildings();
-                        $home->user_id      = $this->currentUserId;
-                        $home->city_id      = $city->id;
-                        $home->shop_item_id = 1;
-                        $home->x            = 392;
-                        $home->y            = 125;
-                        $home->upgrade      = 1;
-                        $home->health       = 100;
-                        $home->created_at   = date('Y-m-d h:i:s');
-                        $home->destroyed    = 0;
-                        $home->save();
-
-                        $character = new Characters();
-                        $character->user_id         = $this->currentUserId;
-                        $character->city_id         = $city->id;
-                        $character->current_city_id = $city->id;
-                        $character->title           = 'John Doe';
-                        $character->x               = 464;
-                        $character->y               = 256;
-                        $character->attributes      = '{}';
-                        $character->health          = 100;
-                        $character->created_at      = date('Y-m-d h:i:s');
-                        $character->updated_at      = date('Y-m-d h:i:s');
-                        $character->dead            = 0;
-                        $character->save();
-
-                    }
                     return $this->response->redirect('worldmap');
                 }
             }

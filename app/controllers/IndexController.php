@@ -19,6 +19,7 @@ class IndexController extends ControllerBase
      */
     public function checkAuth(){
         $loginState = 0;
+        $currentUser = array();
         if(is_array($this->auth->getIdentity())){
 
             $currentUser = $this->auth->getIdentity();
