@@ -18,9 +18,6 @@ class Guide
     public function __construct($userId)
     {
         $this->userId = $userId;
-
-        $response = new \stdClass();
-
     }
 
     /**
