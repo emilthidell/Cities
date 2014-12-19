@@ -12,6 +12,7 @@ $databaseConfig = array(
 );
 
 $applicationDomain = "cities.dev";
+$mandrillAppKey    = "";
 
 /**
 * Production database settings loader
@@ -27,6 +28,8 @@ $databaseConfig = array(
 );
 
 $applicationDomain = "citites.production;
+
+$mandrillAppKey = "";
 
 ?>
 *
@@ -73,7 +76,7 @@ return new \Phalcon\Config(array(
             'fromEmail'         => 'mail@emil.ninja',
             'driver'            => 'mandrill', // or Amazon
             'mandrill' => array(
-                    'apiKey' => ''
+                    'apiKey' => $mandrillAppKey
             )
         )
 ));
