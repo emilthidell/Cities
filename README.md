@@ -12,6 +12,11 @@ Required version: >= 1.1.0 B3
 Get Started
 -----------
 
+#### Test User
+
+Email: test@tes.com
+Password: password
+
 #### Requirements
 
 To run this application on your machine, you need at least:

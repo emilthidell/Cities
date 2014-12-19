@@ -23,12 +23,70 @@ class CitiesController extends ControllerBase
 
     public function initialize()
     {
+
         $currentUser = $this->checkAuth();
 
         if(is_array($currentUser)){
+
             $this->currentUserId = $currentUser['id'];
 
             $cities = Cities::find("user_id = ".$currentUser['id']);
+
+            if(count($cities) == 0){
+
+                $city = new Cities();
+                $city->user_id     = $this->currentUserId;
+                $city->x           = rand(50,950);
+                $city->y           = rand(50,550);
+                $city->state       = 0;
+                $city->environment = 'forest';
+                $city->layer       = 'grass';
+                $city->data        = '{}';
+                $city->created_at  = date("Y-m-d H:i:s");
+                $city->updated_at  = date("Y-m-d H:i:s");
+                $city->title       = 'Your first city';
+                if(!$city->save()){
+                    echo "Error creating the city";
+                    var_dump($city->getMessages());
+                    die();
+                }
+
+                $home = new Buildings();
+                $home->user_id      = $this->currentUserId;
+                $home->city_id      = $city->id;
+                $home->shop_item_id = 1;
+                $home->x            = 392;
+                $home->y            = 125;
+                $home->upgrade      = 1;
+                $home->health       = 100;
+                $home->created_at   = date('Y-m-d h:i:s');
+                $home->destroyed    = 0;
+                if(!$home->save()){
+                    echo "Error creating the hoe";
+                    var_dump($home->getMessages());
+                    die();
+                }
+
+                $character = new Characters();
+                $character->user_id         = $this->currentUserId;
+                $character->city_id         = $city->id;
+                $character->current_city_id = $city->id;
+                $character->title           = 'John Doe';
+                $character->x               = 464;
+                $character->y               = 256;
+                $character->attributes      = '{}';
+                $character->health          = 100;
+                $character->created_at      = date('Y-m-d h:i:s');
+                $character->updated_at      = date('Y-m-d h:i:s');
+                $character->dead            = 0;
+                if(!$character->save()){
+                    echo "Error creating the character";
+                    var_dump($character->getMessages());
+                    die();
+                }
+
+            }
+
             if(count($cities) <= 1){
                 $this->view->setVar('current_city', $cities[0]->id);
             }
