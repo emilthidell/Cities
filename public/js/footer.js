@@ -42,9 +42,9 @@
              var freeSpace       = parseInt(availableHeight)-parseInt(mapHeight);
 
              $('.controlsHolder').css('top', (freeSpace/2)+'px');
-             globals.appfreeSpaceHeight = (freeSpace/2);
+             app.globals.appfreeSpaceHeight = (freeSpace/2);
          }else{
-             globals.appfreeSpaceHeight = 0;
+             app.globals.appfreeSpaceHeight = 0;
          }
      });
   }
