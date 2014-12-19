@@ -3,6 +3,8 @@ Cities
 
 Cities is a web based MMO Game built with the Phalcon PHP Extension, PhalconPHP is a web framework delivered as a C extension providing high performance and lower resource consumption.
 
+Demo: http://cities.emil.ninja
+
 
 NOTE
 ----
