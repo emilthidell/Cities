@@ -1,12 +1,49 @@
 <?php
+
+/**
+* Local database settings
+**/
+$databaseConfig = array(
+    'adapter'  => 'Mysql',
+    'host'     => '127.0.0.1',
+    'username' => 'root',
+    'password' => '',
+    'dbname'   => 'cities'
+);
+
+/**
+* Production database settings loader
+*
+* To activate production mode, place a file in the production servers config folder named config.prod.php with the following content:
+<?php
+$databaseConfig = array(
+    'adapter'  => 'Mysql',
+    'host'     => '127.0.0.1',
+    'username' => 'production_user',
+    'password' => 'production_password',
+    'dbname'   => 'production_dbnam'
+);
+?>
+*
+**/
+$configFile = str_replace("\\","/",__FILE__);
+$databaseProdConfigFileArray = explode("/", $configFile);
+$databaseProdConfigFile = "";
+for ($i = 0; $i <= count($databaseProdConfigFileArray)-2; $i++) {
+    $part = $databaseProdConfigFileArray[$i];
+    if(!strpos($part, ':')){
+        $databaseProdConfigFile .= "/".$part;
+    }else{
+        $databaseProdConfigFile .= $part;
+    }
+}
+$databaseProdConfigFile = $databaseProdConfigFile."/config.prod.php";
+if(file_exists($databaseProdConfigFile)){
+    include($databaseProdConfigFile);
+}
+
 return new \Phalcon\Config(array(
-    'database' => array(
-           'adapter'  => 'Mysql',
-           'host'     => '127.0.0.1',
-           'username' => 'root',
-           'password' => '',
-           'dbname'   => 'cities'
-    ),
+    'database' => $databaseConfig,
     'application' => array(
             'controllersDir' => APP_DIR . '/controllers/',
             'modelsDir'      => APP_DIR . '/models/',
