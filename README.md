@@ -16,7 +16,8 @@ Get Started
 
 #### Test User
 
-Email: test@tes.com
+Email: test@test.com
+
 Password: password
 
 #### Requirements
