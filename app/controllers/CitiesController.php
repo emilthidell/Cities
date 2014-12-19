@@ -146,12 +146,14 @@ class CitiesController extends ControllerBase
         foreach($cities as $city){
 
             $parsedCity = new \stdClass();
-            $parsedCity->id      = $city->id;
-            $parsedCity->preview = $city->id;
-            $parsedCity->x       = $city->x;
-            $parsedCity->y       = $city->y;
-            $parsedCity->title   = $city->title;
-            $parsedCity->user_id = $city->user_id;
+            $parsedCity->id          = $city->id;
+            $parsedCity->preview     = $city->id;
+            $parsedCity->x           = $city->x;
+            $parsedCity->y           = $city->y;
+            $parsedCity->title       = $city->title;
+            $parsedCity->layer       = $city->layer;
+            $parsedCity->environment = $city->environment;
+            $parsedCity->user_id     = $city->user_id;
 
             $extra = "";
             if($city->user_id == $this->currentUserId){

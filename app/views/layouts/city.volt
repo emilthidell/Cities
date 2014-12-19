@@ -64,11 +64,11 @@
         <div align="left" class="city-name">
             <h2>{{ city.title }}</h2>
         </div>
-        <div class="{{ mapFolder }}">
-            <div class="map">
+        <div class="{{ mapFolder }}" id="mapHolder">
+            <div class="map" style="background-image:url(/img/environments/{{ city.environment }}.png);">
                 {% if allied == true %}
                     {% if city.layer != "" %}
-                        <div class="layer" style="background-image:url(/img/{{ mapFolder }}/{{ city.layer }}.png)"></div>
+                        <div class="layer" style="background-image:url(/img/layers/{{ city.layer }}.png)"></div>
                     {% endif %}
 
                     {% for character in characters %}
