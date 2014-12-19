@@ -11,6 +11,8 @@ $databaseConfig = array(
     'dbname'   => 'cities'
 );
 
+$applicationDomain = "cities.dev";
+
 /**
 * Production database settings loader
 *
@@ -23,6 +25,9 @@ $databaseConfig = array(
     'password' => 'production_password',
     'dbname'   => 'production_dbnam'
 );
+
+$applicationDomain = "citites.production;
+
 ?>
 *
 **/
@@ -53,7 +58,7 @@ return new \Phalcon\Config(array(
             'pluginsDir'     => APP_DIR . '/plugins/',
             'cacheDir'       => APP_DIR . '/cache/',
             'baseUri'        => '/',
-            'publicUrl'      => 'cities.dev',
+            'publicUrl'      => $applicationDomain,
             'cryptSalt'      => 'eEAfR|_&G&f,+vU]:jFr!!A&+71w1Ms9~8_4L!<@[N@DyaIP_2My|:+.u>/6m,$D'
     ),
     'mapStates' => array(
