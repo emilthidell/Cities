@@ -29,6 +29,36 @@ class GuideMessages extends Model
     public $seconds;
 
     /**
+     * Width
+     * @var integer
+     */
+    public $width;
+
+    /**
+     * Height
+     * @var integer
+     */
+    public $height;
+
+    /**
+     * Top
+     * @var integer
+     */
+    public $top;
+
+    /**
+     * Left
+     * @var integer
+     */
+    public $left;
+
+    /**
+     * Pointer left
+     * @var integer
+     */
+    public $pointer_left;
+
+    /**
      * Icon
      * @var string
      */
