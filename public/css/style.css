@@ -1,4 +1,45 @@
 
+/*
+* Guide
+*/
+
+#your-guide .guideMessage{
+    position:absolute;
+    display:block;
+    background: white;
+    border-radius: 3px;
+}
+#your-guide .guideMessage .fa{
+    float: left;
+    height: 100%;
+    width: 40px;
+    display: block;
+    font-size: 26px;
+    text-align: center;
+    line-height: 44px;
+    color: rgb(117, 110, 110);
+    text-shadow: 1px 1px white, -1px -1px #131212;
+}
+
+#your-guide .guideMessage .message{
+    line-height: 19px;
+    position: relative;
+    top: 9px;
+}
+
+#your-guide .guideMessage .bubble-pointer{
+    position: absolute;
+    width:52px;
+    height:24px;
+    bottom:-23px;
+    left:50px;
+    background-image: url(/img/bubble-pointer.png);
+    display:block;
+}
+
+/*
+* Application
+*/
 body{
     background-image: url(/img/stardust.png);
 }

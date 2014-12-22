@@ -6,8 +6,11 @@
         <p class="lead">This is a application built with Phalcon Framework</p>
 
         <div align="right" style="text-align: center;">
-      {{ link_to('session/login', '<i class="icon-user icon-white"></i> Login', 'class': 'btn btn-success btn-large') }}
-      {{ link_to('session/signup', '<i class="icon-ok icon-white"></i> Create an Account', 'class': 'btn btn-primary btn-large') }}
+        {%- if !logged_in %}
+            {{ link_to('session/login', '<i class="fa fa-user"></i> Login', 'class': 'btn btn-success btn-large') }}
+            {{ link_to('session/signup', '<i class="fa fa-check"></i> Create an Account', 'class': 'btn btn-primary btn-large') }}
+        {% endif %}
+        <a href="https://github.com/emilthidell/Cities" target="_blank" class="btn btn-default btn-large"><i class="fa fa-github"></i> GitHub</a>
         </div>
     </div>
 </header>
