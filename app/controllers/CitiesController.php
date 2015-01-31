@@ -9,6 +9,7 @@ use Cities\Models\Buildings;
 use Cities\Models\Characters;
 use Cities\Models\Shop;
 use Cities\Models\Allies;
+use Cities\Models\Resources;
 
 use Cities\Guide\Guide;
 
@@ -41,7 +42,8 @@ class CitiesController extends ControllerBase
                 $city->state       = 0;
                 $city->environment = 'forest';
                 $city->layer       = 'grass';
-                $city->data        = '{}';
+                $city->data        = '';
+                $city->tiles       = '[[0,0,1,0,1,0,1,0,1,0],[0,1,1,1,1,1,1,1,1,0],[0,2,1,1,1,3,1,1,1,0],[0,1,1,1,1,1,1,1,1,0],[0,1,1,1,1,1,1,1,1,0],[0,1,1,1,1,4,1,1,1,0],[0,1,0,1,0,1,0,1,0,0]]';
                 $city->created_at  = date("Y-m-d H:i:s");
                 $city->updated_at  = date("Y-m-d H:i:s");
                 $city->title       = 'Your first city';
@@ -62,7 +64,7 @@ class CitiesController extends ControllerBase
                 $home->created_at   = date('Y-m-d h:i:s');
                 $home->destroyed    = 0;
                 if(!$home->save()){
-                    echo "Error creating the hoe";
+                    echo "Error creating the home";
                     var_dump($home->getMessages());
                     die();
                 }
@@ -117,6 +119,8 @@ class CitiesController extends ControllerBase
             }
 
             $this->view->setVar('num_cities', count($cities));
+        }else{
+            $currentUser = 0;
         }
         $this->view->setVar('logged_in', $loginState);
 
@@ -130,6 +134,7 @@ class CitiesController extends ControllerBase
     {
         $userCities = Cities::find('user_id = '.$this->currentUserId);
         $this->view->setTemplateBefore('private');
+        $this->view->setVar('resources'  , $this->getResources($this->currentUserId));
     }
 
     /**
@@ -163,6 +168,57 @@ class CitiesController extends ControllerBase
 
             $city = $this->getCity($cityId);
 
+            $tilesTypes = $this->config->mapTiles;
+
+            $city->htmlTiles = '';
+
+            $city->tiles = json_decode($city->tiles);
+
+            foreach($city->tiles as $x => $cityYArray){
+                foreach($cityYArray as $y => $tile){
+
+                    $outputTileStyle = "";
+                    $tileLeft        = $x*141;
+                    $tileTop         = $y*35;
+                    $tileZIndex      = $y;
+                    $cityTileClass   = 'cityTile';
+                    if($tile === 0){
+                        $cityTileClass .= ' clickable glassTile hiddenTile';
+                    }
+                    if ($y % 2) { $tileLeft = $tileLeft-(70.5); }
+
+                    if($tilesTypes[$tile]){
+
+                        $transition = '';
+                        $transitionCount = 0;
+
+                        $outputTileStyle = ' style="left:'.$tileLeft.'px;top:'.$tileTop.'px;background:url(/img/tiles/'.$tilesTypes[$tile].'.png);z-index:'.$tileZIndex.'"';
+                        if(isset($cityTiles[$x][$y-1]) === true && $tile != $cityTiles[$x][$y-1]){
+                            $transition .= '<div class="transitionTopLeft" style="background:url(/img/tiles/transitions/'.$tilesTypes[$tile].'-'.$tilesTypes[$cityTiles[$x][$y-1]].'-topleft.png)"></div>';
+                            $transitionCount++;
+                        }
+                        if(isset($cityTiles[$x+1][$y-1]) === true && $tile != $cityTiles[$x+1][$y-1]){
+                            $transition .= '<div class="transitionTopRight" style="background:url(/img/tiles/transitions/'.$tilesTypes[$tile].'-'.$tilesTypes[$cityTiles[$x+1][$y-1]].'-topright.png)"></div>';
+                            $transitionCount++;
+                        }
+                        if(isset($cityTiles[$x+1][$y+1]) === true && $tile != $cityTiles[$x+1][$y+1]){
+                            $transition .= ",bottomright";
+                            $transitionCount++;
+                        }
+                        if(isset($cityTiles[$x][$y+1]) === true && $tile != $cityTiles[$x][$y+1]){
+                            $transition .= ",bottomleft";
+                            $transitionCount++;
+                        }
+                        if($transitionCount > 1){
+                            $transition = '';
+                        }
+                    }
+
+                    $city->htmlTiles .= '<div class="'.$cityTileClass.'"'.$outputTileStyle.' data-x="'.$x.'" data-y="'.$y.'">'.$transition.'</div>';
+                }
+                $tileLeft = 0;
+            }
+
             if(!$accessGranted){
                 $allied = $this->isUserAlly($city); // No need to do this if we're already granted access
             }
@@ -180,6 +236,7 @@ class CitiesController extends ControllerBase
             $this->view->setVar('city'       , $city);
             $this->view->setVar('mapMode'    , 'map');
             $this->view->setVar('allied'     , $accessGranted);
+            $this->view->setVar('resources'  , $this->getResources($this->currentUserId));
             $this->view->setVar('characters' , $parsedCharacters);
             $this->view->setVar('buildings'  , $parsedBuildings);
             $this->view->setVar('mapFolder'  , strtolower(str_replace(' ','', $mapState)));
@@ -193,7 +250,7 @@ class CitiesController extends ControllerBase
      */
     public function worldMapAction()
     {
-        $guideModel = new Guide($this->currentUserId);
+        $guideModel    = new Guide($this->currentUserId);
         $guideMessages = $guideModel->getMessages();
         $this->view->setVar('guide', $guideMessages);
 
@@ -211,6 +268,7 @@ class CitiesController extends ControllerBase
             $parsedCity->title       = $city->title;
             $parsedCity->layer       = $city->layer;
             $parsedCity->environment = $city->environment;
+            $parsedCity->tiles       = $city->tiles;
             $parsedCity->user_id     = $city->user_id;
 
             $extra = "";
@@ -229,6 +287,7 @@ class CitiesController extends ControllerBase
         }
 
         $this->view->setVar('cities', $parsedCities);
+        $this->view->setVar('resources'  , $this->getResources($this->currentUserId));
 
         $this->view->setTemplateBefore('worldmap');
     }
@@ -280,6 +339,7 @@ class CitiesController extends ControllerBase
 
         $this->view->setVar('building'  , $parsedBuilding);
         $this->view->setVar('mapMode'   , 'building');
+        $this->view->setVar('resources'  , $this->getResources($this->currentUserId));
 
         $this->view->setTemplateBefore('city');
 
@@ -348,6 +408,14 @@ class CitiesController extends ControllerBase
     private function getShopItem($shopItemId)
     {
         return Shop::findFirst($shopItemId);
+    }
+
+    /**
+     * Get the resources
+     */
+    private function getResources($userId)
+    {
+        return Resources::findFirst('user_id = '.$userId);
     }
 
     /**

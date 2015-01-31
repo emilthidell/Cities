@@ -7,7 +7,7 @@ use Phalcon\Mvc\Model;
  * Cities\Models\Profiles
  * All the profile levels in the application. Used in conjenction with ACL lists
  */
-class Cities extends Model
+class Resources extends Model
 {
 
     /**
@@ -23,54 +23,47 @@ class Cities extends Model
     public $user_id;
 
     /**
-     * Name
-     * @var string
-     */
-    public $title;
-
-    /**
-     * State
+     * Stone
      * @var integer
      */
-    public $state;
+    public $stone;
 
     /**
-     * Layer
-     * @var string
+     * wood
+     * @var integer
      */
-    public $layer;
+    public $wood;
 
     /**
-     * Environment
-     * @var string
+     * food
+     * @var integer
      */
-    public $environment;
+    public $food;
 
     /**
-     * Tiles
-     * @var string
+     * gold
+     * @var integer
      */
-    public $tiles;
+    public $gold;
 
     /**
-     * Data
-     * @var blob
+     * Last fillup
+     * @var timestamp
      */
-    public $data;
+    public $last_fillup;
+
+    /**
+     * Fillup interval
+     * @var integer
+     */
+    public $fillup_interval;
 
     /**
      * Define relationships to Users and Permissions
      */
     public function initialize()
     {
-        $this->setSource("cities");
+        $this->setSource("resources");
     }
 
-    /**
-     * Get the city data from database
-     */
-    public function getData()
-    {
-        return $this->data;
-    }
 }

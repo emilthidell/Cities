@@ -19,6 +19,13 @@
 
               <li><a href="/users">Find Friends</a></li>
               <li><a href="/worldmap">Map</a></li>
+              <li class="resources">
+                  <span class="resource resource-food"></span><span class="resource" id="resource-food">{{ resources.food }}</span>
+                  <span class="resource resource-wood"></span><span class="resource" id="resource-wood">{{ resources.wood }}</span>
+                  <span class="resource resource-stone"></span><span class="resource" id="resource-stone">{{ resources.stone }}</span>
+                  <span class="resource resource-gold"></span><span class="resource" id="resource-gold">{{ resources.gold }}</span>
+              </li>
+              <li><a href="#tileMode">Toggle Tile mode</a></li>
 
             </ul>
 
@@ -65,10 +72,10 @@
             <h2>{{ city.title }}</h2>
         </div>
         <div class="{{ mapFolder }}" id="mapHolder">
-            <div class="map" style="background-image:url(/img/environments/{{ city.environment }}.png);">
+            <div class="map">
                 {% if allied == true %}
-                    {% if city.layer != "" %}
-                        <div class="layer" style="background-image:url(/img/layers/{{ city.layer }}.png)"></div>
+                    {% if city.htmlTiles != "" %}
+                        {{ city.htmlTiles }}
                     {% endif %}
 
                     {% for character in characters %}
@@ -81,7 +88,6 @@
                 {% endif %}
             </div>
         </div>
-
 
     </div>
     {{ content() }}
