@@ -36,7 +36,7 @@ app.guide.init = function(){
                         }
 
                         doBouncing();
-                        $this.initMessages();
+                        app.guide.initMessages();
                         setInterval(doBouncing, 2300);
                       }
                   }
@@ -55,8 +55,6 @@ app.guide.initMessages = function(){
     var lastChar = messages.charAt(messages.length - 1);
 
     if(firstChar == "{" && lastChar == "}"){
-        console.log('Convert to array');''
-        console.log(messages);
         messages = messages.replace(',"2":',',');
         messages = "["+messages.slice(5, messages.length-1)+"]";
     }
@@ -75,7 +73,6 @@ app.guide.initMessages = function(){
     }
     var timeoutDelay = 0;
     $( ".guideMessage" ).each(function( index ) {
-        console.log(index);
         var message = this;
         setTimeout(function(){
             $(message).fadeIn(500, function(){

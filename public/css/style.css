@@ -38,11 +38,207 @@
 }
 
 /*
+* Control panel
+*/
+.selectedChar{
+    width: 59px;
+    height: 59px;
+    background: url('../img/icons/selected-character.png') no-repeat;
+    display: block;
+    position: relative;
+    left: -19px;
+    top: -12px;
+}
+
+.selectedCharOptions{
+    width: 153px;
+    height: 55px;
+    display: block;
+    position: relative;
+    top: -125px;
+    left: -67px;
+}
+
+.selectedCharOptions *{
+    opacity: 0.8;
+}
+
+.selectedCharOptions *:hover{
+    opacity: 1;
+}
+
+.selectedCharOptions .icon-land{
+    width:51px;
+    height:51px;
+    display:block;
+    background:url(../img/icons/character-option-land.png) no-repeat;
+    float:left;
+    top: 30px;
+    position: absolute;
+    left: 0px;
+}
+
+.selectedCharOptions .icon-build{
+    width:51px;
+    height:51px;
+    display:block;
+    background:url(../img/icons/character-option-build.png) no-repeat;
+    float:left;
+    top: 0px;
+    position: absolute;
+    left: 51px;
+}
+
+.selectedCharOptions .icon-decorations{
+    width:51px;
+    height:51px;
+    display:block;
+    background:url(../img/icons/character-option-decorations.png) no-repeat;
+    float:left;
+    top: 30px;
+    position: absolute;
+    left: 102px;
+}
+
+.selectedCharOptions .icon-walk{
+    width:51px;
+    height:51px;
+    display:block;
+    background:url(../img/icons/character-option-walk.png) no-repeat;
+    float:left;
+    top: 86px;
+    position: absolute;
+    left: 0px;
+}
+
+.selectedCharOptions .icon-attack{
+    width:51px;
+    height:51px;
+    display:block;
+    background:url(../img/icons/character-option-attack.png) no-repeat;
+    float:left;
+    top: 86px;
+    position: absolute;
+    left: 102px;
+}
+
+.selectedCharOptions .icon-close{
+    width:51px;
+    height:51px;
+    display:block;
+    background:url(../img/icons/character-option-close.png) no-repeat;
+    float:left;
+    top: 114px;
+    position: absolute;
+    left: 51px;
+}
+
+/*
+* Weather styles
+*/
+
+/*-----RainEffect[Start]----*/
+.rain { width:100%; height:100%; overflow:hidden; background-image:url(images/rain_bg.jpg); background-repeat:no-repeat; background-size:100% 100%; background-attachment:fixed;}
+.rain .drop { display: block; z-index:0; position: absolute; background-repeat: no-repeat; min-width:2px; min-height:4px;
+    background:#E7F4FA;
+    background: -moz-linear-gradient(top, #25A3DE, #E7F4FA);
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#25A3DE), to(#E7F4FA));
+    background: -webkit-linear-gradient(top, #25A3DE, #E7F4FA);
+    background: -ms-linear-gradient(top, #25A3DE, #E7F4FA);
+    background: -o-linear-gradient(top, #25A3DE, #E7F4FA);
+    border-radius: 50% 50% 50% 50%/80% 80% 20% 20%;
+    -moz-border-radius: 50% 50% 50% 50%/90% 90% 10% 10%;
+    -webkit-border-radius:63px 63px 63px 63px/138px 138px 42px 42px;
+}
+.rain .lighting_effect { position:absolute; left:0; top:0; width:1000px; height:562px; background:url(images/lighting_bg.png) no-repeat; opacity:0; }
+.rain .lighting_effect.right { left:inherit; right:0; transform: rotate(-90deg); -ms-transform:rotate(-90deg); -moz-transform: rotate(-90deg); -webkit-transform: rotate(-90deg); }
+/*-----RainEffect[End]----*/
+/*-----SnowEffect[Start]----*/
+.snow { width:100%; overflow-x:hidden; background-image:url(images/snow_bg.jpg); background-repeat:no-repeat; background-size:100% 100%; background-attachment:fixed; background-color:#000; }
+.snow .drop { display: block; z-index:0; position:fixed; background-repeat: no-repeat; min-width:2px; min-height:2px;
+    border-radius: 180px;
+    -moz-border-radius: 180px;
+    -webkit-border-radius: 180px;
+    background:#fff;
+    background: -moz-linear-gradient(top, #fff, #eee);
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fff), to(#eee));
+    background: -webkit-linear-gradient(top, #fff, #eee);
+    background: -ms-linear-gradient(top, #fff, #eee);
+    background: -o-linear-gradient(top, #fff, #eee);
+    box-shadow:0 0 5px #fff;
+    -moz-box-shadow:0 0 5px #fff;
+    -webkit-box-shadow:0 0 5px #fff;
+}
+/*-----SnowEffect[End]----*/
+
+/*
+* Map tiles
+*/
+.cityTile {
+    display: block;
+    width: 141px;
+    height: 99px;
+    position: absolute;
+    font-size:8px;
+}
+
+.cityTile.hiddenTile{
+    display:none;
+}
+
+.cityTile.clickable {
+    cursor: pointer;
+}
+
+.cityTile.glassTile:hover {
+    background-image: url(/img/tiles/glass-active.png) !important;
+}
+
+.cityTile.clickable.glass {
+    cursor: pointer;
+}
+
+.transitionTopLeft{
+    display: block;
+    position: absolute;
+    z-index: 20;
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    top: -5px;
+    left: -7px;
+    background-position: center center;
+}
+
+.transitionTopRight{
+    display: block;
+    position: absolute;
+    z-index: 20;
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    top: -5px;
+    left: 7px;
+    background-position: center center;
+}
+
+/*
 * Application
 */
+html{
+    height:100%;
+    width:100%;
+    display:block;
+}
+
 body{
     background-image: url(/img/stardust.png);
+    height:100%;
+    width:100%;
+    overflow:hidden;
+    display:block;
 }
+
 .container {
     padding-right: 0px;
     padding-left: 0px;
@@ -363,6 +559,36 @@ div.buildingInfoHolder ul.buildingAttributes .sub{
 }
 div.buildingInfoHolder ul.buildingAttributes .add{
     color:green;
+}
+
+li.resources{
+    padding-top: 3px;
+}
+
+li.resources span.resource{
+    width: 25px;
+    height: 35px;
+    display: block;
+    float: left;
+    background-position: center center;
+    background-repeat: no-repeat;
+    line-height: 35px;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+}
+
+li.resources span.resource-wood{
+    background-image: url(/img/icons/wood-20x20.png);
+}
+li.resources span.resource-food{
+    background-image: url(/img/icons/food-20x20.png);
+}
+li.resources span.resource-stone{
+    background-image: url(/img/icons/stone-20x20.png);
+}
+li.resources span.resource-gold{
+    background-image: url(/img/icons/gold-20x20.png);
 }
 
 #your-guide{

@@ -1,8 +1,13 @@
 <?php
 namespace Cities\Controllers;
 
+use Phalcon\Tag;
+use Phalcon\Mvc\Model\Criteria;
 use Phalcon\Mvc\Controller;
 use Phalcon\Mvc\Dispatcher;
+
+use Cities\Models\Resources;
+use Cities\Resource\Resource;
 
 /**
  * ControllerBase
@@ -24,12 +29,22 @@ class ControllerBase extends Controller
 
         $controllerName = $dispatcher->getControllerName();
 
+        // Get the current identity
+        $identity = $this->auth->getIdentity();
+    
+        if (is_array($identity)) { // User logged in, check the resources and how many resources have collected
+            $resources = Resources::findFirst('user_id = '.$identity['id']);
+            $resourceConfig = $this->config;
+            $resourceModel = new Resource($resources, $resourceConfig, $identity['id']);
+            if(!$resources){
+                $resourceModel->create();
+            }else{ // Check for fillups
+                $resourceModel->fillup();
+            }
+        }
+
         // Only check permissions on private controllers
         if ($this->acl->isPrivate($controllerName)) {
-
-            // Get the current identity
-            $identity = $this->auth->getIdentity();
-
             // If there is no identity available the user is redirected to index/index
             if (!is_array($identity)) {
 

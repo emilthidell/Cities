@@ -19,6 +19,12 @@
 
             <li><a href="/users">Find Friends</a></li>
             <li><a href="/worldmap">Map</a></li>
+            <li class="resources">
+                <span class="resource resource-food"></span><span class="resource" id="resource-food">{{ resources.food }}</span>
+                <span class="resource resource-wood"></span><span class="resource" id="resource-wood">{{ resources.wood }}</span>
+                <span class="resource resource-stone"></span><span class="resource" id="resource-stone">{{ resources.stone }}</span>
+                <span class="resource resource-gold"></span><span class="resource" id="resource-gold">{{ resources.gold }}</span>
+            </li>
 
           </ul>
 

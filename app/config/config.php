@@ -71,12 +71,26 @@ return new \Phalcon\Config(array(
             3 => 'Space age',
             4 => 'Moon',
     ),
+    'startResources' => array(
+            'stone'           => 50,
+            'wood'            => 50,
+            'food'            => 50,
+            'gold'            => 0,
+            'fillup_interval' => 5 // Minutes
+    ),
+    'mapTiles' => array(
+            0 => 'glass',
+            1 => 'grass',
+            2 => 'sand',
+            3 => 'stone',
+            4 => 'dirt',
+    ),
     'mail' => array(
-            'fromName'          => 'Cities',
-            'fromEmail'         => 'mail@emil.ninja',
-            'driver'            => 'mandrill', // or Amazon
-            'mandrill' => array(
-                    'apiKey' => $mandrillAppKey
+            'fromName'  => 'Cities',
+            'fromEmail' => 'mail@emil.ninja',
+            'driver'    => 'mandrill', // or Amazon
+            'mandrill'  => array(
+                     'apiKey' => $mandrillAppKey
             )
         )
 ));
