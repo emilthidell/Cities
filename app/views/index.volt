@@ -19,14 +19,15 @@
         {{ content() }}
 
         <script src="/js/jquery-1.11.2.min.js"></script>
+        <script src="/js/jquery.rainsnow.js"  ></script>
         <script src="/js/bootstrap.min.js"    ></script>
         <script src="/js/jquery-ui.min.js"    ></script>
         <script src="/js/app.js"              ></script>
         <script src="/js/globals.js"          ></script>
         <script src="/js/footer.js"           ></script>
+        <script src="/js/character.js"        ></script>
         <script src="/js/guide.js"            ></script>
-        <script src="/js/grid.js"             ></script>
-        <script src="/js/pathfinding.js"      ></script>
+        <script src="/js/positions.js"        ></script>
         <script src="/js/debugtools.js"      ></script>
     </body>
 </html>

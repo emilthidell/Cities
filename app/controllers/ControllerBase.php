@@ -31,6 +31,7 @@ class ControllerBase extends Controller
 
         // Get the current identity
         $identity = $this->auth->getIdentity();
+    
         if (is_array($identity)) { // User logged in, check the resources and how many resources have collected
             $resources = Resources::findFirst('user_id = '.$identity['id']);
             $resourceConfig = $this->config;
