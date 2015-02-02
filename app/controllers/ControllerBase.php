@@ -25,13 +25,15 @@ class ControllerBase extends Controller
      */
     public function beforeExecuteRoute(Dispatcher $dispatcher)
     {
+        date_default_timezone_set('UTC');
+        
         $this->preDefineTemplateVars();
 
         $controllerName = $dispatcher->getControllerName();
 
         // Get the current identity
         $identity = $this->auth->getIdentity();
-    
+
         if (is_array($identity)) { // User logged in, check the resources and how many resources have collected
             $resources = Resources::findFirst('user_id = '.$identity['id']);
             $resourceConfig = $this->config;
