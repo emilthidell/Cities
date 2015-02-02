@@ -17,15 +17,14 @@ app.debugtools.init = function(){
             app.debugtools.glassHidden = true;
         }
     });
-    var tld = $this.getDomainName();
+
+    var tld = $this.getTld();
     if(tld != 'dev'){
-        window.console.log = function(output){
-            //console.log('Not possible');
-        }
+        window.console.log = function(output){}
     }
 };
 
-app.debugtools.getDomainName = function(){
+app.debugtools.getTld = function(){
     var tld = "";
     var tokens = document.domain.split('.');
     while(tokens.length){
